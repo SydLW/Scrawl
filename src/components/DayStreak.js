@@ -1,6 +1,6 @@
 import "../styling/DayStreak.css";
 
-function DayStreak() {
-  return <div className="DayStreak"> Streak: 5 Days</div>;
+function DayStreak(props) {
+  return <div className="DayStreak"> Streak: {props.days} Days</div>;
 }
 export default DayStreak;
