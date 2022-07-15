@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 
 function MemoryItem(props) {
-  return <li>{props.item}</li>;
+  return (
+    <li>
+      {props.item.date}
+      <div>{props.item.writing}</div>
+    </li>
+  );
 }
 
 export default MemoryItem;

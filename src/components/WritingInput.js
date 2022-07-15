@@ -17,13 +17,14 @@ function WritingInput(props) {
   };
 
   const onSubmit = (e) => {
-    props.addMemories(input, getCurrentDate());
+    props.addMemories(input, getCurrentDate(), props.prompt);
+    props.submitted(true);
     e.preventDefault();
     setInput("");
   };
 
   const timedSubmit = () => {
-    props.addMemories(input, getCurrentDate());
+    props.addMemories(input, getCurrentDate(), props.prompt);
     props.startCountdownOver(false);
     setInput("");
   };

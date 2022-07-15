@@ -20,13 +20,20 @@ function TimerV2(props) {
 
   const reset = () => {
     setSecondsRemaining(props.seconds);
+    props.resetSubmit(false);
   };
 
   useEffect(() => {
+    //only neccesary for reset idk if i actually want this function
     if (secondsRemaining === 0) {
       props.countdownDone(true);
     }
-    if (secondsRemaining > 0 && props.active === true) {
+
+    if (
+      secondsRemaining > 0 &&
+      props.active === true &&
+      props.submitted === false
+    ) {
       const interval = setInterval(() => {
         setSecondsRemaining(secondsRemaining - 1);
       }, 1000);
