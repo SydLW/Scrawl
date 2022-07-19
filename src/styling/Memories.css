@@ -1,10 +1,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Arima&family=Edu+VIC+WA+NT+Beginner:wght@500&family=Ibarra+Real+Nova&family=Lato:wght@300;700&family=Merriweather:wght@300;400&family=Poppins:wght@100;200&display=swap");
 .Memories-button {
-  background-color: WHITE;
-  border-radius: 20px;
   font-family: "Ibarra Real Nova", serif;
+  padding: 3px 10px;
+  font-weight: 500;
+  background: transparent;
+  outline: none !important;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+  border-style: solid;
 }
-
+.Memories-button {
+  border: 2px solid #000;
+}
+.Memories-button:hover {
+  background: #000;
+  color: #fff;
+}
+.Memories-button:active {
+  top: 2px;
+}
 .Memories-list {
   font-size: 18px;
   list-style: none;

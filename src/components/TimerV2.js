@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import "../styling/TimerV2.css";
 function converSecondstoString(secs) {
   let minutes_divisor = secs % (60 * 60);
   let minutes = Math.floor(minutes_divisor / 60);
@@ -45,7 +46,10 @@ function TimerV2(props) {
   return (
     <div className="Timer">
       {timerString}
-      <button onClick={reset}>Reset</button>
+
+      <button className="TimerV2-reset" onClick={reset}>
+        Reset
+      </button>
     </div>
   );
 }

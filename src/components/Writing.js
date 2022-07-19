@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import WritingPrompt from "./WritingPrompt";
 import WritingInput from "./WritingInput";
-import Timer from "./Timer";
+import DayStreak from "./DayStreak";
 import TimerV2 from "./TimerV2";
 import Memories from "./Memories";
 import "../styling/Writing.css";
+
+const MOCK_PROMPT = "She had waited twenty years for ...";
 
 function Writing() {
   const [memories, setMemories] = useState([
@@ -13,14 +15,24 @@ function Writing() {
   const [countdownActive, setCountdownActive] = useState(false);
   const [countdownAtZero, setCountdownAtZero] = useState(false);
   const [submittedStopTimer, setSubmittedStopTimer] = useState(false);
-  const [writingPrompt, setWritingPrompt] = useState("");
+  const [writingPrompt, setWritingPrompt] = useState(MOCK_PROMPT);
+  const [dayStreak, setDayStreak] = useState(0);
 
-  const addMemories = (input, date, prompt) => {
+  const addMemories = (input) => {
+    const current = new Date();
+    const newDate = `${current.getDate()}/${
+      current.getMonth() + 1
+    }/${current.getFullYear()}`;
     setMemories((oldArray) => [
       ...oldArray,
-      { writing: input, date: date, prompt: prompt },
+      { writing: input, date: newDate, prompt: writingPrompt },
     ]);
   };
+
+  const handleDayStreak = () => {
+    setDayStreak(5);
+  };
+
   const startedTyping = () => {
     setCountdownActive(true);
   };
@@ -32,14 +44,13 @@ function Writing() {
     setSubmittedStopTimer(submitted);
   };
 
-  const getWritingPrompt = (prompt) => {
-    setWritingPrompt(prompt);
-  };
-
   return (
     <div className="Writing">
-      <h1 className="Writing-header">Writing</h1>
-      <WritingPrompt getPrompt={getWritingPrompt} />
+      <DayStreak days={dayStreak} />
+      <h1 className="Writing-header">
+        <em>Scrawl</em>
+      </h1>
+      <WritingPrompt prompt={writingPrompt} />
       {/* <Timer seconds={timeSeconds} /> */}
       <TimerV2
         seconds={10}
@@ -54,6 +65,7 @@ function Writing() {
         start={startedTyping}
         submitted={submitStopTimer}
         startCountdownOver={countdownDone}
+        countdownAtZero={countdownAtZero}
       />
       <Memories memories={memories} />
     </div>

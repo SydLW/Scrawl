@@ -4,6 +4,7 @@ function MemoryItem(props) {
   return (
     <li>
       {props.item.date}
+      <div>{props.item.prompt}</div>
       <div>{props.item.writing}</div>
     </li>
   );

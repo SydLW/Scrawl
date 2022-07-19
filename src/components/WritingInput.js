@@ -8,23 +8,15 @@ function WritingInput(props) {
     setInput(e.target.value);
   };
 
-  const getCurrentDate = () => {
-    const current = new Date();
-    const date = `${current.getDate()}/${
-      current.getMonth() + 1
-    }/${current.getFullYear()}`;
-    return date;
-  };
-
   const onSubmit = (e) => {
-    props.addMemories(input, getCurrentDate(), props.prompt);
+    props.addMemories(input);
     props.submitted(true);
     e.preventDefault();
     setInput("");
   };
 
   const timedSubmit = () => {
-    props.addMemories(input, getCurrentDate(), props.prompt);
+    props.addMemories(input);
     props.startCountdownOver(false);
     setInput("");
   };
@@ -37,10 +29,10 @@ function WritingInput(props) {
   };
 
   useEffect(() => {
-    if (props.countdownDone) {
+    if (props.countdownAtZero) {
       timedSubmit();
     }
-  }, [props.countdownDone]);
+  }, [props.countdownAtZero]);
 
   return (
     <div className="WritingInput">
