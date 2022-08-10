@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import WritingPrompt from "./WritingPrompt";
 import WritingInput from "./WritingInput";
 import DayStreak from "./DayStreak";
@@ -19,6 +19,11 @@ function Writing() {
   const [dayStreak, setDayStreak] = useState(0);
 
   const addMemories = (input) => {
+    let data = localStorage.getItem("memories");
+    if (data !== null) {
+      let jsonData = JSON.parse(data);
+      setMemories(jsonData);
+    }
     const current = new Date();
     const newDate = `${current.getDate()}/${
       current.getMonth() + 1
@@ -29,9 +34,13 @@ function Writing() {
     ]);
   };
 
-  const handleDayStreak = () => {
-    setDayStreak(5);
-  };
+  useEffect(() => {
+    localStorage.setItem("memories", JSON.stringify(memories));
+  }, [memories]);
+
+  // const handleDayStreak = () => {
+  //   setDayStreak(5);
+  // };
 
   const startedTyping = () => {
     setCountdownActive(true);
